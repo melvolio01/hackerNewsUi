@@ -6,7 +6,7 @@ const ArticleInfo = ({ post }) => {
     const { title, by, descendants, id, score, time, type, url } = post;
     const dateString = formatTimestamp(time);
     return (
-        <div>
+        <div className="article-info">
             <h4>
                 {url ? <a href={url}>{title}</a> :
                     <Link to={{ pathname: '/article', state: { post: post } }}>{title}</Link>}

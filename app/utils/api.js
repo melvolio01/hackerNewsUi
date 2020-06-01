@@ -15,3 +15,16 @@ const fetchItem = (id) => {
     return fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
         .then(res => res.json())
 }
+
+export const fetchComments = (ids) => {
+    console.log('fetchComments...')
+    return Promise.all(ids.map((id) => {
+        return Promise.resolve(fetchComment(id));
+    }));
+}
+
+const fetchComment = (id) => {
+    console.log('fetchComment....')
+    return fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
+        .then(res => res.json())
+}

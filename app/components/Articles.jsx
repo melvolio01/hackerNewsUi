@@ -11,7 +11,6 @@ class Articles extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props)
         fetchPostIds()
             .then((res) => this.setState({
                 posts: res
