@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: './app/index.js',
@@ -8,9 +9,20 @@ module.exports = {
     },
     module: {
         rules: [
-            { test: /\.(js|jsx)$/, use: 'babel-loader' },
+            { test: /\.(js|mjs|jsx|ts|tsx)$/, use: 'babel-loader' },
             { test: /\.(css|scss)$/, use: ['style-loader', 'css-loader', 'sass-loader'] }
         ]
     },
-    mode: 'development'
+    devServer: {
+        historyApiFallback: true
+    },
+    resolve: {
+        extensions: ['.js', '.jsx'],
+    },
+    mode: 'development',
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: 'app/index.html'
+        })
+    ]
 }
