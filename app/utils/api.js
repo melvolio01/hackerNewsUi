@@ -1,10 +1,12 @@
-export const fetchPostIds = () => {
-    return fetch('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty')
+export const fetchPostIds = (type) => {
+    const apiAddr = `https://hacker-news.firebaseio.com//v0/newstories.json?print=pretty`
+    return fetch(apiAddr)
         .then(res => res.json())
         .then(ids => fetchPosts(ids))
 }
 
 const fetchPosts = (ids) => {
+    console.log('fetchPosts')
     const idArr = ids.slice(0, 50);
     return Promise.all(idArr.map((id) => {
         return Promise.resolve(fetchItem(id));
@@ -12,6 +14,7 @@ const fetchPosts = (ids) => {
 }
 
 const fetchItem = (id) => {
+    console.log('fetchItem')
     return fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
         .then(res => res.json())
 }

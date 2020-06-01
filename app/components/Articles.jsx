@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { fetchPostIds } from '../utils/api';
+import { removeDuds } from '../utils/helpers';
 import ArticleInfo from './ArticleInfo';
 
 class Articles extends Component {
@@ -11,21 +12,22 @@ class Articles extends Component {
     }
 
     componentDidMount() {
-        fetchPostIds()
-            .then((res) => this.setState({
-                posts: res
+        const { type } = this.props;
+        fetchPostIds(type)
+            .then((res) => removeDuds(res))
+            .then((items) => this.setState({
+                posts: items
             }))
-            .catch(err => console.log(err));
+            .catch((err) => console.log(err));
     }
 
     render() {
-        const { type } = this.props;
         const { posts } = this.state;
         return (
             <div className="articles">
                 {posts.map((post) => {
-                    const { id } = post;
-                    return <div key={id}>
+                    console.log(post.id)
+                    return <div>
                         <ArticleInfo post={post} />
                     </div>
                 })}

@@ -11,7 +11,7 @@ body {
 
 .articles {
     padding: 10px;
-    margin: 0 20px;
+    margin: 0 20px 20px 20px;
 }
 
 .article-details {
@@ -35,4 +35,18 @@ body {
     padding: 20px;
     margin: 20px 0;
 
+}
+
+.header-options {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    margin: 20px 20px 0 20px;
+
+    li {
+        margin-right: 10px;
+        font-size: 20px;
+        font-weight: 600;
+    }
 }

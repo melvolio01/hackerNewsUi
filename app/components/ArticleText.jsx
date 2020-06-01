@@ -27,7 +27,7 @@ class ArticleText extends Component {
             <div className="article-details">
                 <h2>{title}</h2>
                 <p>by {by}, on {dateString}, with {descendants} comments</p>
-                <p>{text}</p>
+                <div dangerouslySetInnerHTML={{ __html: text }}></div>
                 <div className="comments">
                     {this.state.comments.map((comment) => {
                         const { id, by, text } = comment;
@@ -43,3 +43,15 @@ class ArticleText extends Component {
 }
 
 export default ArticleText;
+
+// import React from 'react';
+
+// const ArticleText = () => {
+//     return (
+//         <div>
+
+//         </div>
+//     );
+// };
+
+// export default ArticleText;
