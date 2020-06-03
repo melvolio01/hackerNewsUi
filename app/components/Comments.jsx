@@ -7,7 +7,8 @@ class Comments extends Component {
         super(props);
 
         this.state = {
-            comments: []
+            comments: [],
+            loading: true
         }
     }
 
@@ -16,13 +17,14 @@ class Comments extends Component {
         if (kids) {
             fetchComments(kids)
                 .then((data) => this.setState({
-                    comments: data
+                    comments: data,
+                    loading: false
                 }))
         }
     }
 
-    render(props) {
-        const { title, by, descendants, id, score, time, type, url, kids } = this.props.location.state.post;
+    render() {
+        const { title, by, descendants, time } = this.props.location.state.post;
         const dateString = formatTimestamp(time);
 
         return (

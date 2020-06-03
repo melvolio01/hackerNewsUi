@@ -8,7 +8,8 @@ class Articles extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            posts: []
+            posts: [],
+            loading: true
         }
     }
 
@@ -26,21 +27,24 @@ class Articles extends Component {
 
     fetchPosts() {
         this.setState({
-            posts: []
+            posts: [],
+            loading: true
         })
 
         fetchPostIds(this.props.type)
             .then((res) => removeDuds(res))
             .then((items) => this.setState({
-                posts: items
+                posts: items,
+                loading: false
             }))
             .catch((err) => console.log(err));
     }
 
     render() {
-        const { posts } = this.state;
+        const { posts, loading } = this.state;
         return (
             <div className="articles">
+                {loading && (<div className="spinner"></div>)}
                 {posts.map((post) => {
                     return <div key={post.id} >
                         <ErrorBoundary>

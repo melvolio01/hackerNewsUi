@@ -9,7 +9,8 @@ class AuthorInfo extends Component {
 
         this.state = {
             author: null,
-            posts: null
+            posts: null,
+            loading: true
         }
     }
 
@@ -20,13 +21,15 @@ class AuthorInfo extends Component {
                 author: author,
             }))
             .then(() => fetchPosts(this.state.author.submitted.slice(0, 20)))
+            .then((posts) => posts.filter(({ type }) => type === 'story'))
             .then((posts) => this.setState({
-                posts: posts
+                posts: posts,
+                loading: false
             }))
     }
 
     render() {
-        const { author, posts } = this.state;
+        const { author, posts, loading } = this.state;
         const date = author && formatTimestamp(author.created)
         return (
             <div>
@@ -37,11 +40,13 @@ class AuthorInfo extends Component {
                         <div dangerouslySetInnerHTML={{ __html: author.about }}></div>
                     </div>
                 )}
+                {this.state.loading && <div className="spinner"></div>}
+
                 {posts && (
                     <div>
                         <h4>Posts</h4>
                         {posts.map((post) => {
-                            return <ArticleInfo post={post} />
+                            return <ArticleInfo post={post} key={post.id} />
                         })}
                     </div>
                 )}
