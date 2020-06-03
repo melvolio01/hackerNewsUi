@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ArticleInfo from './ArticleInfo';
 import { formatTimestamp } from '../utils/helpers';
 import { fetchComments } from '../utils/api';
 

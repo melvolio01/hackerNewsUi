@@ -1,5 +1,5 @@
 export const fetchPostIds = (type) => {
-    const apiAddr = `https://hacker-news.firebaseio.com//v0/newstories.json?print=pretty`
+    const apiAddr = `https://hacker-news.firebaseio.com//v0/${type}stories.json?print=pretty`
     return fetch(apiAddr)
         .then(res => res.json())
         .then(ids => fetchPosts(ids))

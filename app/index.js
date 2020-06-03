@@ -5,6 +5,7 @@ import Header from './components/Header.jsx';
 import Articles from './components/Articles.jsx';
 import ArticleText from './components/ArticleText.jsx';
 import ErrorBoundary from './components/ErrorBoundary.jsx';
+import Comments from './components/Comments.jsx';
 import './index.scss';
 
 class App extends Component {
@@ -13,7 +14,6 @@ class App extends Component {
     }
 
     render() {
-
         return (
             <Router>
                 <div>
@@ -21,8 +21,9 @@ class App extends Component {
                     <ErrorBoundary>
                         <Switch>
                             <Route exact path='/' render={() => <Articles type='top' />} />
-                            <Route path='/new' render={(props) => <Articles {...props} type='new' />} />
+                            <Route path='/new' render={() => <Articles type='new' />} />
                             <Route path='/article' component={ArticleText} />
+                            <Route path='/comments' component={Comments} />
                             <Route render={() => <h1>404</h1>} />
                         </Switch>
                     </ErrorBoundary>

@@ -13,8 +13,23 @@ class Articles extends Component {
     }
 
     componentDidMount() {
+        this.fetchPosts()
+    }
+
+
+    componentDidUpdate(prevProps) {
         const { type } = this.props;
-        fetchPostIds(type)
+        if (type !== prevProps.type) {
+            this.fetchPosts()
+        }
+    }
+
+    fetchPosts() {
+        this.setState({
+            posts: []
+        })
+
+        fetchPostIds(this.props.type)
             .then((res) => removeDuds(res))
             .then((items) => this.setState({
                 posts: items

@@ -12,7 +12,7 @@ const ArticleInfo = ({ post }) => {
                     <Link to={{ pathname: '/article', state: { post: post } }}>{title}</Link>}
 
             </h4>
-            <p>by {by}, on {dateString}, with {descendants} comments</p>
+            <p>by {by}, on {dateString}, with <Link to={{ pathname: "/comments", state: { post: post } }}>{descendants} comments</Link></p>
         </div>
     );
 };
