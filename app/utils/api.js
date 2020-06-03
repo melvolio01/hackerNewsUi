@@ -5,7 +5,7 @@ export const fetchPostIds = (type) => {
         .then(ids => fetchPosts(ids))
 }
 
-const fetchPosts = (ids) => {
+export const fetchPosts = (ids) => {
     const idArr = ids.slice(0, 50);
     return Promise.all(idArr.map((id) => {
         return Promise.resolve(fetchItem(id));
@@ -24,7 +24,11 @@ export const fetchComments = (ids) => {
 }
 
 const fetchComment = (id) => {
-    console.log('fetchComment....')
     return fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
+        .then(res => res.json())
+}
+
+export const fetchUser = (authorId) => {
+    return fetch(`https://hacker-news.firebaseio.com/v0/user/${authorId}.json?print=pretty`)
         .then(res => res.json())
 }
