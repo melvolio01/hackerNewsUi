@@ -14,13 +14,15 @@ class ArticleText extends Component {
 
     componentDidMount() {
         const { kids } = this.props.location.state.post;
-        fetchComments(kids)
-            .then((data) => this.setState({
-                comments: data
-            }))
+        if (kids) {
+            fetchComments(kids)
+                .then((data) => this.setState({
+                    comments: data
+                }))
+        }
     }
 
-    render(props) {
+    render() {
         const { title, by, descendants, id, score, time, type, url, kids, text } = this.props.location.state.post;
         const dateString = formatTimestamp(time);
         return (
@@ -29,13 +31,15 @@ class ArticleText extends Component {
                 <p>by {by}, on {dateString}, with {descendants} comments</p>
                 <div dangerouslySetInnerHTML={{ __html: text }}></div>
                 <div className="comments">
-                    {this.state.comments.map((comment) => {
-                        const { id, by, text } = comment;
-                        return <div key={comment.id} className="comment">
-                            <p>by {by}, {dateString}</p>
-                            <div dangerouslySetInnerHTML={{ __html: text }}></div>
-                        </div>
-                    })}
+                    {this.state.comments && (
+                        this.state.comments.map((comment) => {
+                            const { id, by, text } = comment;
+                            return <div key={comment.id} className="comment">
+                                <p>by {by}, {dateString}</p>
+                                <div dangerouslySetInnerHTML={{ __html: text }}></div>
+                            </div>
+                        }))
+                    }
                 </div>
             </div>
         );
@@ -43,15 +47,3 @@ class ArticleText extends Component {
 }
 
 export default ArticleText;
-
-// import React from 'react';
-
-// const ArticleText = () => {
-//     return (
-//         <div>
-
-//         </div>
-//     );
-// };
-
-// export default ArticleText;

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { fetchPostIds } from '../utils/api';
 import { removeDuds } from '../utils/helpers';
 import ArticleInfo from './ArticleInfo';
+import ErrorBoundary from './ErrorBoundary';
 
 class Articles extends Component {
     constructor(props) {
@@ -26,9 +27,10 @@ class Articles extends Component {
         return (
             <div className="articles">
                 {posts.map((post) => {
-                    console.log(post.id)
-                    return <div>
-                        <ArticleInfo post={post} />
+                    return <div key={post.id} >
+                        <ErrorBoundary>
+                            <ArticleInfo post={post} />
+                        </ErrorBoundary>
                     </div>
                 })}
             </div>
