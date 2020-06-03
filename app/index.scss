@@ -97,9 +97,6 @@ body {
   .dark {
       background-color: #323232;
       color: #f4f4f4;
-      padding: 30px;
-      height: 100%;
-      overflow: scroll;
       li {
           color: #f4f4f4;
       }
@@ -119,4 +116,10 @@ body {
       .comment {
           background-color: rgba(0, 0, 0, 0.2);
       }
+  }
+
+  .theme-div {
+    padding: 50px;
+    height: 100%;
+    overflow: scroll;
   }

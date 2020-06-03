@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { formatTimestamp } from '../utils/helpers';
 import { fetchComments } from '../utils/api';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class ArticleText extends Component {
     constructor(props) {
@@ -23,7 +24,7 @@ class ArticleText extends Component {
     }
 
     render() {
-        const { title, by, descendants, id, score, time, type, url, kids, text } = this.props.location.state.post;
+        const { location: { state: { post: { title, by, descendants, time, text } } } } = this.props;
         const dateString = formatTimestamp(time);
         return (
             <div className="article-details">
@@ -44,6 +45,10 @@ class ArticleText extends Component {
             </div>
         );
     }
+}
+
+ArticleText.propTypes = {
+    location: PropTypes.objectOf(PropTypes.any).isRequired
 }
 
 export default ArticleText;

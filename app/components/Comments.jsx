@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { formatTimestamp } from '../utils/helpers';
 import { fetchComments } from '../utils/api';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class Comments extends Component {
     constructor(props) {
@@ -14,7 +15,7 @@ class Comments extends Component {
     }
 
     componentDidMount() {
-        const { kids } = this.props.location.state.post;
+        const { location: { state: { post: { kids } } } } = this.props;
         if (kids) {
             fetchComments(kids)
                 .then((data) => this.setState({
@@ -25,7 +26,7 @@ class Comments extends Component {
     }
 
     render() {
-        const { title, by, descendants, time } = this.props.location.state.post;
+        const { location: { state: { post: { title, by, descendants, time } } } } = this.props;
         const dateString = formatTimestamp(time);
 
         return (
@@ -48,6 +49,10 @@ class Comments extends Component {
             </div>
         );
     }
+}
+
+Comments.propTypes = {
+    location: PropTypes.objectOf(PropTypes.any).isRequired
 }
 
 export default Comments;

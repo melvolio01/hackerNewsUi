@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { fetchUser, fetchPosts } from '../utils/api';
 import { formatTimestamp } from '../utils/helpers';
 import ArticleInfo from './ArticleInfo';
+import PropTypes from 'prop-types';
 
 class AuthorInfo extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ class AuthorInfo extends Component {
     }
 
     componentDidMount() {
-        const { author } = this.props.location.state;
+        const { location: { state: { author } } } = this.props;
         fetchUser(author)
             .then(author => this.setState({
                 author: author,
@@ -53,6 +54,10 @@ class AuthorInfo extends Component {
             </div>
         );
     }
+}
+
+AuthorInfo.propTypes = {
+    location: PropTypes.objectOf(PropTypes.any).isRequired
 }
 
 export default AuthorInfo;

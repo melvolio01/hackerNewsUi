@@ -3,6 +3,7 @@ import { fetchPostIds } from '../utils/api';
 import { removeDuds } from '../utils/helpers';
 import ArticleInfo from './ArticleInfo';
 import ErrorBoundary from './ErrorBoundary';
+import PropTypes from 'prop-types';
 
 class Articles extends Component {
     constructor(props) {
@@ -55,6 +56,10 @@ class Articles extends Component {
             </div>
         );
     }
+}
+
+Articles.propTypes = {
+    type: PropTypes.string
 }
 
 export default Articles;

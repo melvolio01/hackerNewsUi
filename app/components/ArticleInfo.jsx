@@ -1,9 +1,10 @@
 import React from 'react';
 import { formatTimestamp } from '../utils/helpers';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const ArticleInfo = ({ post }) => {
-    const { title, by, descendants, id, score, time, type, url } = post;
+    const { title, by, descendants, time, url } = post;
     const dateString = formatTimestamp(time);
     return (
         <div className="article-info">
@@ -16,5 +17,9 @@ const ArticleInfo = ({ post }) => {
         </div>
     );
 };
+
+ArticleInfo.propTypes = {
+    post: PropTypes.objectOf(PropTypes.any).isRequired
+}
 
 export default ArticleInfo;

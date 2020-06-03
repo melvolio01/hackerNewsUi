@@ -28,7 +28,7 @@ class App extends Component {
         return (
             <Router>
                 <ThemeProvider value={this.state}>
-                    <div className={this.state.theme}>
+                    <div className={`theme-div ${this.state.theme}`}>
                         <Header />
                         <ErrorBoundary>
                             <Switch>
