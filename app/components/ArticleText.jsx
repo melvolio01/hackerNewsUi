@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { formatTimestamp } from '../utils/helpers';
 import { fetchComments } from '../utils/api';
+import { Link } from 'react-router-dom';
 
 class ArticleText extends Component {
     constructor(props) {
@@ -27,7 +28,7 @@ class ArticleText extends Component {
         return (
             <div className="article-details">
                 <h2>{title}</h2>
-                <p>by {by}, on {dateString}, with {descendants} comments</p>
+                <p>by <Link to={{ pathname: '/author', state: { author: by } }} >{by}</Link>, on {dateString}, with <Link to={{ pathname: "/comments", state: { post: this.props.location.state.post } }}>{descendants} comments</Link></p>
                 <div dangerouslySetInnerHTML={{ __html: text }}></div>
                 <div className="comments">
                     {this.state.comments && (

@@ -20,7 +20,7 @@ class AuthorInfo extends Component {
             .then(author => this.setState({
                 author: author,
             }))
-            .then(() => fetchPosts(this.state.author.submitted.slice(0, 20)))
+            .then(() => fetchPosts(this.state.author.submitted))
             .then((posts) => posts.filter(({ type }) => type === 'story'))
             .then((posts) => this.setState({
                 posts: posts,

@@ -7,29 +7,41 @@ import ArticleText from './components/ArticleText.jsx';
 import ErrorBoundary from './components/ErrorBoundary.jsx';
 import Comments from './components/Comments.jsx';
 import AuthorInfo from './components/AuthorInfo.jsx';
+import { ThemeProvider, ThemeConsumer } from './contexts/theme.js';
 import './index.scss';
 
 class App extends Component {
     constructor(props) {
         super(props)
+
+        this.state = {
+            theme: 'dark',
+            toggleTheme: () => {
+                this.setState(({ theme }) => ({
+                    theme: theme === 'light' ? 'dark' : 'light'
+                }))
+            }
+        }
     }
 
     render() {
         return (
             <Router>
-                <div>
-                    <Header />
-                    <ErrorBoundary>
-                        <Switch>
-                            <Route exact path='/' render={() => <Articles type='top' />} />
-                            <Route path='/new' render={() => <Articles type='new' />} />
-                            <Route path='/article' component={ArticleText} />
-                            <Route path='/comments' component={Comments} />
-                            <Route path='/author' component={AuthorInfo} />
-                            <Route render={() => <h1>404</h1>} />
-                        </Switch>
-                    </ErrorBoundary>
-                </div>
+                <ThemeProvider value={this.state}>
+                    <div className={this.state.theme}>
+                        <Header />
+                        <ErrorBoundary>
+                            <Switch>
+                                <Route exact path='/' render={() => <Articles type='top' />} />
+                                <Route path='/new' render={() => <Articles type='new' />} />
+                                <Route path='/article' component={ArticleText} />
+                                <Route path='/comments' component={Comments} />
+                                <Route path='/author' component={AuthorInfo} />
+                                <Route render={() => <h1>404</h1>} />
+                            </Switch>
+                        </ErrorBoundary>
+                    </div>
+                </ThemeProvider>
             </Router>
         );
     }
