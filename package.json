@@ -4,7 +4,8 @@
   "description": "a practice app consuming the hackernews api",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "build": "NODE_ENV='production' webpack"
   },
   "babel": {
     "presets": [
