@@ -27,6 +27,8 @@ const authorReducer = (state, action) => {
                 error: error.message,
                 loading: false
             }
+        default:
+            return new Error('That action was not recognized.')
     }
 }
 
